@@ -1,6 +1,8 @@
 package com.handson.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "musicas")
@@ -15,6 +17,9 @@ public class Musicas {
     @ManyToOne
     @JoinColumn(name = "ArtistaId")
     private Artistas artistas;
+
+    @ManyToMany(mappedBy = "musicas")
+    private Set<Playlists> playlist = new HashSet<>();
 
     public String getId() {
         return id;
@@ -38,5 +43,13 @@ public class Musicas {
 
     public void setArtistas(Artistas artistas) {
         this.artistas = artistas;
+    }
+
+    public Set<Playlists> getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(Set<Playlists> playlist) {
+        this.playlist = playlist;
     }
 }
